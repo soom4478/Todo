@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <h2 th:text="'Update Todo'"></h2>
+    <form method="post" action="/update_done">
+        Todo Title: <br>
+        <input type="text" name="title" th:value="${dto.title}"> <br>
+        Todo Description: <br>
+        <input type="text" name="description" th:value="${dto.description}"> <br>
+        Todo Completed: <br>
+        <input type="text" name="status" th:value="${dto.status}"><br>
+        <input type="hidden" name="id" th:value="${dto.id}">
+        <button type="submit">Submit</button>
+    </form>
+</div>
+</body>
+</html>

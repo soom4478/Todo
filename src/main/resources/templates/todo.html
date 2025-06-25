@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Todo List</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    a {
+      text-decoration: none;
+      color: #fff;
+      background-color: #007bff;
+      padding: 8px 16px;
+      border-radius: 4px;
+      margin-bottom: 20px;
+      display: inline-block;
+    }
+
+    a:hover {
+      background-color: #0056b3;
+    }
+
+    table {
+      width: 100%;
+      max-width: 1000px;
+      table-layout: fixed;
+      border-collapse: collapse;
+      margin: 0 auto;
+      background-color: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    th, td {
+      padding: 12px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+
+    th {
+      background-color: #f0f0f0;
+      color: #333;
+    }
+
+    tr:nth-child(even) {
+      background-color: #fafafa;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    .action-buttons a, .action-buttons button {
+      margin: 2px;
+      padding: 6px 10px;
+      font-size: 0.9em;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .action-buttons a {
+      background-color: #28a745;
+      color: white;
+    }
+
+    .action-buttons a:hover {
+      background-color: #1e7e34;
+    }
+
+    .action-buttons button {
+      background-color: #6c757d;
+      color: white;
+    }
+
+    .action-buttons button:hover {
+      background-color: #5a6268;
+    }
+
+    .action-buttons .delete {
+      background-color: #dc3545;
+    }
+
+    .action-buttons .delete:hover {
+      background-color: #c82333;
+    }
+  </style>
+</head>
+<body>
+<h1 th:text="'Todo'">Todo</h1>
+<a th:href="@{/input}">+ Add Todo</a>
+
+<table>
+  <tr>
+    <th>id</th>
+    <th>title</th>
+    <th>description</th>
+    <th>status</th>
+    <th>regDate</th>
+    <th>action</th>
+  </tr>
+  <tr th:each="item : ${dto}">
+    <td th:text="${item.id}"></td>
+    <td th:text="${item.title}"></td>
+    <td th:text="${item.description}"></td>
+    <td th:text="${item.status}"></td>
+    <td th:text="${item.regDate}"></td>
+    <td class="action-buttons">
+      <a th:href="@{'/updateInput/' + ${item.id}}">Update</a>
+      <a th:href="@{'/delete/' + ${item.id}}" class="delete">Delete</a>
+      <button type="button" th:onclick="|location.href='@{/complete/{id}(id=${item.id})}'|">Complete</button>
+      <button type="button" th:onclick="|location.href='@{/incomplete/{id}(id=${item.id})}'|">Incomplete</button>
+    </td>
+  </tr>
+</table>
+</body>
+</html>
